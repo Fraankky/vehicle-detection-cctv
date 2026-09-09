@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Realtime vehicle detection monitor for Pantau Semar camera streams.">
+    <title>Traffic object detection</title>
+    <link rel="stylesheet" href="{{ url_for('static', path='style.css') }}">
+  </head>
+  <body>
+    <a class="skip-link" href="#monitor">Skip to monitor</a>
+    <main class="shell" id="monitor">
+      <nav class="topbar" aria-label="Primary navigation">
+        <a class="brand" href="/" aria-label="Semar Watch home">
+          <span><strong>Traffic object detection</strong><small>vehicle intelligence</small></span>
+        </a>
+        <div class="nav-meta">
+          <span class="live-indicator"><span id="status-dot" class="dot"></span><span id="status">Connecting</span></span>
+          <span class="clock-label">LIVE / HLS</span>
+        </div>
+      </nav>
+
+      <header class="hero">
+        <div>
+          <p class="eyebrow">PANTAUSEMAR / MODEL SERVING</p>
+          <h1>Traffic, object detection</h1>
+        </div>
+        <div class="hero-copy">
+          <p>One active city camera, processed frame by frame. Bounding boxes are generated on the server by the trained YOLO model.</p>
+          <div class="source-line"><span class="source-pulse"></span><span id="camera">Mencari kamera aktif...</span></div>
+        </div>
+      </header>
+
+      <section class="monitor-grid" aria-label="Realtime camera monitor">
+        <div class="video-card">
+          <div class="video-head"><span>Detection feed</span><span class="feed-tag">ANNOTATED / 640 PX</span></div>
+          <div class="video-frame">
+            <img src="/stream.mjpg" alt="Stream CCTV dengan bounding box kendaraan">
+            <div class="scanline" aria-hidden="true"></div>
+            <span class="corner corner-tl"></span><span class="corner corner-tr"></span>
+            <span class="corner corner-bl"></span><span class="corner corner-br"></span>
+          </div>
+          <div class="video-foot"><span>Source: Pantau Semar</span><span>Fallback enabled</span></div>
+        </div>
+        <aside class="stats-card">
+          <div class="panel-heading"><span>Live telemetry</span><span class="panel-index">01</span></div>
+          <div class="metric metric-primary"><span>Objects in frame</span><strong id="total">-</strong></div>
+          <div class="metric"><span>Inference rate</span><strong><span id="fps">-</span><small> FPS</small></strong></div>
+          <div class="metric"><span>Model latency</span><strong><span id="latency">-</span><small> ms</small></strong></div>
+          <div class="class-list">
+            <div class="panel-heading"><span>Detected classes</span><span class="panel-index">02</span></div>
+            <pre id="classes">Menunggu data...</pre>
+          </div>
+          <div class="system-note"><span class="note-mark">i</span><span>Latest frame only. Old frames are discarded to keep latency low.</span></div>
+        </aside>
+      </section>
+
+      <footer class="footer"><span>Semar Watch / realtime object detection</span><span>Built for model serving study</span></footer>
+    </main>
+    <script src="{{ url_for('static', path='app.js') }}"></script>
+  </body>
+</html>

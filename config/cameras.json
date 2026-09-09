@@ -1,0 +1,32 @@
+[
+  {
+    "id": "kyai-saleh",
+    "name": "KYAI SALEH",
+    "url": "https://livepantau.semarangkota.go.id/ba20c7a2-f499-48c4-af4f-815068f678a0/index.m3u8"
+  },
+  {
+    "id": "thamrin-pandanaran-360",
+    "name": "THAMRIN PANDANARAN 360",
+    "url": "https://livepantau.semarangkota.go.id/162c2b72-d3a6-490e-b15e-eca621897f3b/index.m3u8"
+  },
+  {
+    "id": "ki-mangun-sarkoro",
+    "name": "KI MANGUN SARKORO",
+    "url": "https://livepantau.semarangkota.go.id/5782b424-53c1-4bea-bdc5-0e4f8a871b7d/index.m3u8"
+  },
+  {
+    "id": "bangkong",
+    "name": "BANGKONG",
+    "url": "https://livepantau.semarangkota.go.id/b8013256-1adc-4d5f-aed6-b28ed7d0b52e/index.m3u8"
+  },
+  {
+    "id": "milo",
+    "name": "MILO",
+    "url": "https://livepantau.semarangkota.go.id/1e056193-d64c-4e53-84a1-41a55d373ad0/index.m3u8"
+  },
+  {
+    "id": "kalibanteng",
+    "name": "KALIBANTENG",
+    "url": "https://livepantau.semarangkota.go.id/14692ada-0bf1-4da9-bd4f-13a926804958/index.m3u8"
+  }
+]
