@@ -9,7 +9,7 @@ ROOT = Path(__file__).resolve().parent.parent
 
 @dataclass(frozen=True)
 class Settings:
-    model_path: Path = ROOT / "models" / "best.pt"
+    model_path: Path = ROOT / "weight" / "best.pt"
     cameras_path: Path = ROOT / "config" / "cameras.json"
     confidence: float = 0.25
     image_size: int = 640

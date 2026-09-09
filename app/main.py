@@ -1,7 +1,7 @@
 import asyncio
 from contextlib import asynccontextmanager
 
-from fastapi import FastAPI, Request, WebSocket
+from fastapi import FastAPI, File, HTTPException, Request, UploadFile, WebSocket
 from fastapi.responses import HTMLResponse, StreamingResponse
 from fastapi.templating import Jinja2Templates
 from starlette.staticfiles import StaticFiles
@@ -34,7 +34,29 @@ async def index(request: Request):
 
 @app.get("/health")
 async def health():
-    return {"status": "ok", "model_loaded": detector.loaded, "camera": camera_service.status()}
+    return {
+        "status": "ok",
+        "model_loaded": detector.loaded,
+        "model_path": str(detector.model_path),
+        "classes": detector.classes,
+        "camera": camera_service.status(),
+    }
+
+
+@app.post("/source/camera")
+async def source_camera():
+    await camera_service.use_camera()
+    return {"source": "camera"}
+
+
+@app.post("/upload-video")
+async def upload_video(video: UploadFile = File(...)):
+    content = await video.read()
+    try:
+        await camera_service.use_video(content, video.filename or "upload.mp4")
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+    return {"source": "upload", "filename": video.filename}
 
 
 async def mjpeg_frames():

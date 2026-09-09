@@ -10,6 +10,7 @@ class Detector:
     def __init__(self) -> None:
         self.model = None
         self.error: str | None = None
+        self.model_path = settings.model_path
 
         if not settings.model_path.exists():
             self.error = f"Model not found: {settings.model_path}"
@@ -26,6 +27,12 @@ class Detector:
     def loaded(self) -> bool:
         return self.model is not None
 
+    @property
+    def classes(self) -> dict:
+        if not self.model:
+            return {}
+        return dict(self.model.names)
+
     def predict(self, frame):
         if not self.model:
             return frame, {"total": 0, "classes": {}}, 0.0
@@ -39,7 +46,8 @@ class Detector:
         )[0]
         annotated = result.plot()
         names = result.names
-        classes = Counter(names[int(class_id)] for class_id in result.boxes.cls.tolist())
+        class_ids = result.boxes.cls.tolist() if result.boxes else []
+        classes = Counter(names[int(class_id)] for class_id in class_ids)
         elapsed_ms = (time.perf_counter() - started) * 1000
 
         return annotated, {
